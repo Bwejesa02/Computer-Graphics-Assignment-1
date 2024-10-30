@@ -1,5 +1,7 @@
 **AI usage exclusive to spelling correction and formatting**
 
+https://youtu.be/sSRmzxCwrMU
+
 The main objective was to create a scene that showcases different lighting and shading techniques, while also adding interactivity. 
 
 Project Summary
