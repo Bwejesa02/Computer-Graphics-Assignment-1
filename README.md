@@ -1,58 +1,74 @@
-# Computer Graphics Assignment 1
+Computer Graphics Assignment 1
 
-This project demonstrates core computer graphics concepts through a simple interactive scene in Unity. It includes various shaders, lighting effects, color grading, and basic gameplay mechanics. This README explains each part of the project in detail, with a particular focus on the shaders, which are central to the assignment.
+The main objective was to create a scene that showcases different lighting and shading techniques, while also adding interactivity. 
 
-## Project Overview
+Project Summary
 
-The goal of this project was to create a small Unity scene to showcase different lighting and shading effects, color grading, and a basic game setup. I built it with a player character that collects items in a confined space, using shaders to highlight different lighting models and effects.
+The scene contains:
 
-## Scene and Gameplay Setup
+    Player : The main character, controllable with WASD keys, that interacts with the scene by collecting items.
+    Collectibles (Spheres): Objects the player collects to achieve a win condition.
+    Boundaries: Walls around the play area to keep the player within bounds.
+    UI Text: A simple display showing the remaining collectibles, and a You Win! message when all are collected.
 
-The scene consists of:
-- **Player (Cube)**: The main character that the user controls using WASD keys.
-- **Collectibles (Spheres)**: Items scattered around the plane that disappear when collected.
-- **Boundaries (Walls)**: Simple walls to keep the player within the play area.
-- **UI Text**: Display showing the number of collectibles left and a "You Win" message when all items are gathered.
 
-This setup creates a straightforward game where the player must collect all items to win. 
 
-## Shaders and Lighting
 
-### Lambert (Diffuse) Shader
-The Lambert shader provides a basic diffuse lighting effect, which I used to simulate natural, even lighting across surfaces. This shader calculates light intensity based on the angle between the light direction and the surface normal, giving it a smooth, non-reflective look. 
+Here’s a breakdown of the main shaders I implemented.
 
-- **Why Lambert?** Diffuse lighting is the foundation of most lighting models and was essential to start with to demonstrate a basic lighting effect. It helps give objects a soft, realistic look without sharp reflections, suitable for surfaces like walls or the ground.
-- **Implementation**: The Lambert shader multiplies the light color with the surface color based on the angle of incidence, creating an even spread of light on the object's surface.
+Lambert (Diffuse) Shader
 
-### Specular Shader
-The Specular shader adds highlights to objects, simulating shinier surfaces that reflect light. I chose this shader to demonstrate reflective properties and how different materials can interact with light in unique ways.
+The Lambert shader provides basic diffuse lighting. This shader models light scattering evenly across the surface, without any reflective highlights. It’s particularly effective for objects that don’t need shine, creating a soft, even-lit look that brings out the object’s form without extra distractions.
 
-- **Why Specular?** Specular lighting is essential for objects that need a sense of polish or gloss. Using specular highlights in the scene gives a stronger impression of light sources and helps differentiate surface materials.
-- **Implementation**: The shader calculates the angle between the viewer and the reflection of the light on the surface. This reflection vector is used to determine where the light highlights appear on the object, producing sharp, focused highlights.
+Implementation Details:
 
-### Rim Lighting Shader
-The Rim Lighting shader creates a glowing effect around the edges of objects, emphasizing their silhouette. This effect is calculated based on the angle between the surface normal and the view direction, so the edges facing away from the camera glow more.
+    The Lambert shader calculates the dot product between the light direction and the surface normal. The result is a natural look, as it spreads light evenly over the surface.
+    In this project, I specifically tuned this shader to emphasize the ambient light setting, giving objects a solid base lighting for comparison with other effects.
 
-- **Why Rim Lighting?** Rim lighting is useful to make objects stand out visually, especially in stylized or atmospheric scenes. I included this shader to add a unique look that draws attention to object outlines, giving them a subtle glow and enhancing visibility.
-- **Implementation**: The shader calculates the dot product between the surface normal and view direction, adding color to areas where this value is lower, emphasizing the edges.
+Scene Impact: Using diffuse lighting as a base is useful for providing natural lighting that feels soft and unobtrusive. This shader’s simplicity makes it a good choice for foundational lighting in the scene, especially for surfaces like the ground.
 
-### Lighting Mode Toggle Script
-To demonstrate the different lighting modes, I created a **LightingModeToggle script** that allows switching between various lighting setups. This script applies lighting effects globally, impacting all objects in the scene, and is controlled by pressing specific keys:
-- **1** - No Lighting (ambient only)
-- **2** - Ambient Lighting Only
-- **3** - Specular Lighting Only
-- **4** - Ambient + Specular
+Specular Shader
 
-This toggle script helps compare the effects of each lighting mode directly in the scene. 
+The Specular shader creates shiny highlights on objects, simulating reflective surfaces. It’s designed to model light bouncing off a surface in a focused way, as you’d see on polished or metallic surfaces.
 
-#### How It Works:
-The script adjusts Unity's ambient light settings and enables or disables a directional light for specular highlights. For example, in "No Lighting" mode, it disables all lights to give a neutral view of objects. This approach lets me control the scene lighting without changing each object's individual materials.
+Implementation Details:
 
----
+    This shader calculates the reflection angle between the light source and the camera. When the angle is close, it produces a bright highlight.
+    I adjusted the glossiness and intensity of the specular reflection to fit the lighting in this scene, balancing it to keep the highlights noticeable but not overwhelming.
 
-## Color Grading
+Scene Impact: Adding specular highlights helps distinguish materials visually and makes objects appear more dynamic. The highlights interact with the scene’s light source, which enhances the realism of the scene by mimicking shiny surfaces under direct light.
 
-Color grading was added to adjust the scene's color tones. I used a **Color Grading Shader** with two LUTs (Neutral and Warm) to change the overall mood of the scene. This effect was applied to the main camera, impacting everything in the view.
+Rim Lighting Shader
 
-- **Why Color Grading?** Color grading allows for a uniform color adjustment across the entire scene, creating a more cohesive look. In this project, the Neutral LUT gives a standard appearance, while the Warm LUT adds a yellowish tone, suggesting a warmer atmosphere.
-- **Implementation**: The Color Grading shader uses a Look-Up Table (LUT) to remap colors in real-time, altering the appearance of every object in the camera's view.
+The Rim Lighting shader highlights the edges of objects, giving them a subtle outline or “glow.” This shader is commonly used to make objects stand out, as it adds an effect that accentuates their silhouette.
+
+Implementation Details:
+
+    This effect is calculated by taking the dot product between the surface normal and the view direction. Lower values (when the surface faces away from the camera) are emphasized, creating a glow around the edges.
+    I tuned the intensity of the rim lighting to keep it subtle, so it adds depth without overpowering the scene.
+
+Scene Impact: Rim lighting helps objects stand out from their surroundings and provides a sense of depth. In darker parts of the scene, the rim lighting effect makes objects easier to distinguish and adds a unique stylistic touch.
+
+
+LightingModeToggle Script
+
+The LightingModeToggle script controls different lighting modes, allowing me to showcase each shader and lighting effect. By pressing specific keys, I can toggle between different lighting setups to compare how they affect the scene:
+
+    1 - No Lighting: Ambient light only.
+    2 - Ambient Lighting Only: Applies only the Lambert (Diffuse) lighting.
+    3 - Specular Lighting Only: Adds shiny highlights without the ambient component.
+    4 - Ambient + Specular: Combines soft ambient lighting with specular highlights.
+
+Color Grading
+
+Color grading was added to adjust the entire scene’s color tone. This effect creates a specific mood or atmosphere by shifting colors slightly.
+Color Grading Shader
+
+The color grading setup uses a Look-Up Table (LUT) to adjust colors across the scene. I created two versions of the LUT: Neutral (default colors) and Warm (adds a yellow tone).
+
+Implementation Details:
+
+    The shader applies a LUT to the camera view, remapping colors based on the selected LUT. I used a Neutral LUT as a baseline and a Warm LUT for an alternative color style.
+    Instead of switching LUTs automatically, I can manually change between them in the editor for the demonstration.
+
+Scene Impact: The color grading effect shifts the overall feel of the scene, with the cool LUT giving a chill appearance and the Warm LUT adding a cozy, yellowish tone. This effect helps convey different moods without changing the actual color of objects individually.
