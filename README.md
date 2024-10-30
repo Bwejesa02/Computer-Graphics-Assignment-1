@@ -1,4 +1,4 @@
-Computer Graphics Assignment 1
+**AI usage exclusive to spelling correction and formatting**
 
 The main objective was to create a scene that showcases different lighting and shading techniques, while also adding interactivity. 
 
@@ -6,12 +6,10 @@ Project Summary
 
 The scene contains:
 
-    Player : The main character, controllable with WASD keys, that interacts with the scene by collecting items.
-    Collectibles (Spheres): Objects the player collects to achieve a win condition.
-    Boundaries: Walls around the play area to keep the player within bounds.
-    UI Text: A simple display showing the remaining collectibles, and a You Win! message when all are collected.
-
-
+Player : The main character, controllable with WASD keys, that interacts with the scene by collecting items.
+Collectibles (Spheres): Objects the player collects to achieve a win condition.
+Boundaries: Walls around the play area to keep the player within bounds.
+UI Text: A simple display showing the remaining collectibles, and a You Win! message when all are collected.
 
 
 Here’s a breakdown of the main shaders I implemented.
@@ -22,8 +20,8 @@ The Lambert shader provides basic diffuse lighting. This shader models light sca
 
 Implementation Details:
 
-    The Lambert shader calculates the dot product between the light direction and the surface normal. The result is a natural look, as it spreads light evenly over the surface.
-    In this project, I specifically tuned this shader to emphasize the ambient light setting, giving objects a solid base lighting for comparison with other effects.
+The Lambert shader calculates the dot product between the light direction and the surface normal. The result is a natural look, as it spreads light evenly over the surface.
+In this project, I specifically tuned this shader to emphasize the ambient light setting, giving objects a solid base lighting for comparison with other effects.
 
 Scene Impact: Using diffuse lighting as a base is useful for providing natural lighting that feels soft and unobtrusive. This shader’s simplicity makes it a good choice for foundational lighting in the scene, especially for surfaces like the ground.
 
@@ -33,8 +31,8 @@ The Specular shader creates shiny highlights on objects, simulating reflective s
 
 Implementation Details:
 
-    This shader calculates the reflection angle between the light source and the camera. When the angle is close, it produces a bright highlight.
-    I adjusted the glossiness and intensity of the specular reflection to fit the lighting in this scene, balancing it to keep the highlights noticeable but not overwhelming.
+This shader calculates the reflection angle between the light source and the camera. When the angle is close, it produces a bright highlight.
+I adjusted the glossiness and intensity of the specular reflection to fit the lighting in this scene, balancing it to keep the highlights noticeable but not overwhelming.
 
 Scene Impact: Adding specular highlights helps distinguish materials visually and makes objects appear more dynamic. The highlights interact with the scene’s light source, which enhances the realism of the scene by mimicking shiny surfaces under direct light.
 
@@ -44,8 +42,8 @@ The Rim Lighting shader highlights the edges of objects, giving them a subtle ou
 
 Implementation Details:
 
-    This effect is calculated by taking the dot product between the surface normal and the view direction. Lower values (when the surface faces away from the camera) are emphasized, creating a glow around the edges.
-    I tuned the intensity of the rim lighting to keep it subtle, so it adds depth without overpowering the scene.
+This effect is calculated by taking the dot product between the surface normal and the view direction. Lower values (when the surface faces away from the camera) are emphasized, creating a glow around the edges.
+I tuned the intensity of the rim lighting to keep it subtle, so it adds depth without overpowering the scene.
 
 Scene Impact: Rim lighting helps objects stand out from their surroundings and provides a sense of depth. In darker parts of the scene, the rim lighting effect makes objects easier to distinguish and adds a unique stylistic touch.
 
@@ -68,7 +66,7 @@ The color grading setup uses a Look-Up Table (LUT) to adjust colors across the s
 
 Implementation Details:
 
-    The shader applies a LUT to the camera view, remapping colors based on the selected LUT. I used a Neutral LUT as a baseline and a Warm LUT for an alternative color style.
-    Instead of switching LUTs automatically, I can manually change between them in the editor for the demonstration.
+The shader applies a LUT to the camera view, remapping colors based on the selected LUT. I used a Neutral LUT as a baseline and a Warm LUT for an alternative color style.
+Instead of switching LUTs automatically, I can manually change between them in the editor for the demonstration.
 
 Scene Impact: The color grading effect shifts the overall feel of the scene, with the cool LUT giving a chill appearance and the Warm LUT adding a cozy, yellowish tone. This effect helps convey different moods without changing the actual color of objects individually.
